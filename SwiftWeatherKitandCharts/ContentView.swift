@@ -6,6 +6,23 @@
 //
 
 import SwiftUI
+import Charts
+import WeatherKit
+import CoreLocation
+
+class LocationManager: NSObject, ObservableObject {
+    @Published var currentLocation: CLLocation?
+    
+    private let locationManager = CLLocationManager()
+    
+    override init() {
+        super.init()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLHeadingFilterNone
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+}
 
 struct ContentView: View {
     var body: some View {
